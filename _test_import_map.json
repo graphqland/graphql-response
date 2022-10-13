@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "https://deno.land/x/gaphql_response@$VERSION/": "./",
+    "https://deno.land/std@$VERSION/": "https://deno.land/std@0.159.0/",
+    "https://esm.sh/graphql@$VERSION": "https://esm.sh/v96/graphql@16.6.0"
+  }
+}
