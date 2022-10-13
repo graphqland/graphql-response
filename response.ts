@@ -31,26 +31,25 @@ export function withCharset<T extends string>(value: T): `${T};charset=UTF-8` {
   return `${value};charset=UTF-8`;
 }
 
-/** Create a GraphQL over HTTP compliant `Response` object.
+/** Create a GraphQL-over-HTTP compliant HTTP `Response` from an HTTP `Request`.
  *
  * @example
  * ```ts
- * import {
- *   createResponse,
- * } from "https://deno.land/x/graphql_http@$VERSION/mod.ts";
+ * import { createResponse } from "https://deno.land/x/gaphql_response@$VERSION/mod.ts";
  * import { buildSchema } from "https://esm.sh/graphql@$VERSION";
  *
- * const schema = buildSchema(`query {
- *   hello: String!
- * }`);
+ * const url = new URL("http://localhost/graphql");
+ * const query = `query Test { greet }`;
+ * url.searchParams.set("query", query);
+ * const qqlRequest = new Request(url);
  *
- * const res = createResponse({
+ * const schema = buildSchema(`type Query {
+ *   greet: String
+ * }`);
+ * const response = await createResponse(qqlRequest, {
  *   schema,
- *   source: `query { hello }`,
- *   method: "POST",
- * }, {
  *   rootValue: {
- *     hello: "world",
+ *     greet: () => "hello world!",
  *   },
  * });
  * ```
