@@ -7,6 +7,7 @@ import {
   GraphQLError,
   HttpError,
   isErr,
+  match,
   parse,
   specifiedRules,
   Status,
@@ -19,7 +20,6 @@ import {
   validate as validateJSON,
 } from "./resolvers.ts";
 import { ExecutionParams } from "./types.ts";
-import { match } from "./match.ts";
 
 const APP_GQL_RESPONSE = "application/graphql-response+json";
 const APP_JSON = "application/json";

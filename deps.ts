@@ -41,6 +41,7 @@ export {
   JSON,
   type json,
 } from "https://deno.land/x/pure_json@1.0.0-beta.1/mod.ts";
+export { match } from "https://deno.land/x/pattern_match@1.0.0-beta.1/mod.ts";
 
 export function isNativeObject(
   // deno-lint-ignore ban-types
