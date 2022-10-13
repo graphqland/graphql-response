@@ -1,3 +1,6 @@
+// Copyright 2022-latest the graphqland authors. All rights reserved. MIT license.
+// This module is browser compatible.
+
 // deno-lint-ignore-file no-explicit-any
 
 import {
