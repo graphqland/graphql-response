@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         deno: [v1.x]
-        node: [16.x]
+        node: [18.x]
 
     steps:
       - name: Checkout
