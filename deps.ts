@@ -4,7 +4,6 @@
 export {
   type DocumentNode,
   executeSync,
-  type ExecutionArgs,
   type ExecutionResult,
   type FormattedExecutionResult,
   getOperationAST,
@@ -21,15 +20,14 @@ export { type Maybe } from "https://esm.sh/v96/graphql@16.6.0/jsutils/Maybe.d.ts
 export {
   createHttpError,
   HttpError,
-  Status,
-} from "https://deno.land/std@0.159.0/http/mod.ts";
-export { accepts } from "https://deno.land/std@0.159.0/http/mod.ts";
+} from "https://deno.land/std@0.159.0/http/http_errors.ts";
+export { Status } from "https://deno.land/std@0.159.0/http/http_status.ts";
+export { accepts } from "https://deno.land/std@0.159.0/http/negotiation.ts";
 export {
   hasOwn,
   isNull,
   isObject,
   isString,
-  isUndefined,
 } from "https://deno.land/x/isx@1.0.0-beta.22/mod.ts";
 export {
   isErr,
@@ -40,10 +38,7 @@ export {
   type GraphQLRequestOptions,
   type GraphQLRequestParams,
 } from "https://deno.land/x/gql_request@1.0.0-beta.1/mod.ts";
-export {
-  JSON,
-  type json,
-} from "https://deno.land/x/pure_json@1.0.0-beta.1/mod.ts";
+export { type json } from "https://deno.land/x/pure_json@1.0.0-beta.1/mod.ts";
 export { match } from "https://deno.land/x/pattern_match@1.0.0-beta.1/mod.ts";
 
 export function isNativeObject(
