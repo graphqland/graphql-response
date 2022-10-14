@@ -157,6 +157,9 @@ export async function createResponse(
 
     return new Response(JSON.stringify(result), {
       status: Status.BadRequest,
+      headers: {
+        "content-type": withCharset(accept),
+      },
     });
   }
 

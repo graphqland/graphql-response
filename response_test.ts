@@ -327,7 +327,7 @@ describe("createResponse", () => {
           {
             status: Status.BadRequest,
             headers: {
-              "content-type": "text/plain;charset=UTF-8",
+              "content-type": "application/graphql-response+json;charset=UTF-8",
             },
           },
         ),
