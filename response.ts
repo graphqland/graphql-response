@@ -27,10 +27,6 @@ import { ExecutionParams } from "./types.ts";
 const APP_GQL_RESPONSE = "application/graphql-response+json";
 const APP_JSON = "application/json";
 
-export function withCharset<T extends string>(value: T): `${T};charset=UTF-8` {
-  return `${value};charset=UTF-8`;
-}
-
 /** Create a GraphQL-over-HTTP compliant HTTP `Response` from an HTTP `Request`.
  *
  * @example
@@ -214,4 +210,8 @@ function responseFrom(error: HttpError): Response {
     headers: error.headers,
     status: error.status,
   });
+}
+
+function withCharset<T extends string>(value: T): `${T};charset=UTF-8` {
+  return `${value};charset=UTF-8`;
 }
