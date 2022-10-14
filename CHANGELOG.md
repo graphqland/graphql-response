@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/graphqland/graphql-response/compare/1.0.0-beta.1...1.0.0-beta.2) (2022-10-14)
+
+
+### Bug Fixes
+
+* **response:** fix graphql validation error response header ([f7dbe2b](https://github.com/graphqland/graphql-response/commit/f7dbe2bbe835528f9e792b6f0a47bc7db6676253))
+
 # 1.0.0-beta.1 (2022-10-13)
 
 
