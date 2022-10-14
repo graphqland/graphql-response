@@ -39,7 +39,7 @@ export {
   type GraphQLRequestParams,
 } from "https://deno.land/x/gql_request@1.0.0-beta.1/mod.ts";
 export { type json } from "https://deno.land/x/pure_json@1.0.0-beta.1/mod.ts";
-export { match } from "https://deno.land/x/pattern_match@1.0.0-beta.2/mod.ts";
+export { match } from "https://deno.land/x/pattern_match@1.0.0-beta.3/mod.ts";
 
 export function isNativeObject(
   // deno-lint-ignore ban-types

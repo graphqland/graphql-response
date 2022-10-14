@@ -16,11 +16,11 @@ import {
 } from "./deps.ts";
 import { validateRequestParams } from "./validate.ts";
 
-type Raw = {
-  query?: json;
-  operationName?: json;
-  variables?: json;
-  extensions?: json;
+export type RawParams = {
+  readonly query?: json;
+  readonly operationName?: json;
+  readonly variables?: json;
+  readonly extensions?: json;
 };
 
 export function validate(data: json): Result<
@@ -40,7 +40,10 @@ export function validate(data: json): Result<
   return result;
 }
 
-export function resolvePostParams(text: string): Result<Raw, HttpError> {
+export async function resolvePostParams(
+  request: Request,
+): Promise<Result<RawParams, HttpError>> {
+  const text = await request.text();
   const result = unsafe<json, TypeError>(() => JSON.parse(text));
 
   if (isErr(result)) {
@@ -69,8 +72,9 @@ export function resolvePostParams(text: string): Result<Raw, HttpError> {
 }
 
 export function resolveGetParams(
-  url: URL,
-): Result<Raw, HttpError> {
+  request: Request,
+): Result<RawParams, HttpError> {
+  const url = new URL(request.url);
   const query = url.searchParams.get("query");
   const operationName = url.searchParams.get("operationName");
 

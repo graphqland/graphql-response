@@ -12,12 +12,14 @@ import {
   isErr,
   match,
   parse,
+  Result,
   specifiedRules,
   Status,
   unsafe,
   validate,
 } from "./deps.ts";
 import {
+  RawParams,
   resolveGetParams,
   resolvePostParams,
   validate as validateJSON,
@@ -91,19 +93,15 @@ export async function createResponse(
     });
   }
 
-  const value = await match(request.method, {
-    GET: () => {
-      const url = new URL(request.url);
-      const params = resolveGetParams(url);
-
-      return Promise.resolve(params);
-    },
-    POST: async () => {
-      const text = await request.text();
-
-      return resolvePostParams(text);
-    },
-  });
+  const value = await match<
+    "GET" | "POST",
+    Promise<Result<RawParams, HttpError>> | Result<RawParams, HttpError>,
+    Request
+  >(
+    request.method,
+    { GET: resolveGetParams, POST: resolvePostParams },
+    request,
+  );
 
   if (isErr(value)) return responseFrom(value.value);
 
