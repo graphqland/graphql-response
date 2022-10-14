@@ -43,8 +43,13 @@ export function validate(data: json): Result<
 export async function resolvePostParams(
   request: Request,
 ): Promise<Result<RawParams, HttpError>> {
-  const text = await request.text();
-  const result = unsafe<json, TypeError>(() => JSON.parse(text));
+  const textResult = await request.text().then(Result.ok).catch(Result.err);
+
+  if (isErr(textResult)) {
+    return Result.err(createHttpError(Status.BadRequest));
+  }
+
+  const result = unsafe<json, TypeError>(() => JSON.parse(textResult.value));
 
   if (isErr(result)) {
     return Result.err(
