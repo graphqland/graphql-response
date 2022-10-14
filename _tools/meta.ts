@@ -65,5 +65,9 @@ export const makeOptions = (version: string): BuildOptions => ({
       name: "pure-json",
       version: "1.0.0-beta.1",
     },
+    "https://deno.land/x/pattern_match@1.0.0-beta.2/mod.ts": {
+      name: "@miyauci/pattern-match",
+      version: "1.0.0-beta.2",
+    },
   },
 });
