@@ -11,20 +11,26 @@ import {
   HttpError,
   isErr,
   match,
+  object,
+  optional,
   parse,
   Result,
   specifiedRules,
   Status,
+  string,
   unsafe,
   validate,
+  validateSchema,
 } from "./deps.ts";
-import {
-  RawParams,
-  resolveGetParams,
-  resolvePostParams,
-  validate as validateJSON,
-} from "./resolvers.ts";
+import { RawParams, resolveGetParams, resolvePostParams } from "./resolvers.ts";
 import { ExecutionParams } from "./types.ts";
+
+const GraphQLParams = object({
+  query: string(),
+  operationName: optional(string()),
+  variables: optional(object()),
+  extensions: optional(object()),
+});
 
 const APP_GQL_RESPONSE = "application/graphql-response+json";
 const APP_JSON = "application/json";
@@ -105,11 +111,20 @@ export async function createResponse(
 
   if (isErr(value)) return responseFrom(value.value);
 
-  const vResult = validateJSON(value.value);
+  const validationResult = validateSchema(value.value, GraphQLParams);
 
-  if (isErr(vResult)) return responseFrom(vResult.value);
+  if (validationResult[0]) {
+    return new Response(
+      validationResult[0].message ??
+        "GraphQL request parameter is invalid.",
+      {
+        status: Status.BadRequest,
+      },
+    );
+  }
 
-  const { query, variables: variableValues, operationName } = vResult.value;
+  const { query, variables: variableValues, operationName } =
+    validationResult[1];
   const {
     schema,
     contextValue,

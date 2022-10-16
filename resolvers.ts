@@ -3,8 +3,6 @@
 
 import {
   createHttpError,
-  GraphQLRequestOptions,
-  GraphQLRequestParams,
   HttpError,
   isErr,
   isNativeObject,
@@ -14,7 +12,6 @@ import {
   Status,
   unsafe,
 } from "./deps.ts";
-import { validateRequestParams } from "./validate.ts";
 
 export type RawParams = {
   readonly query?: json;
@@ -22,23 +19,6 @@ export type RawParams = {
   readonly variables?: json;
   readonly extensions?: json;
 };
-
-export function validate(data: json): Result<
-  GraphQLRequestParams & GraphQLRequestOptions,
-  HttpError
-> {
-  const result = validateRequestParams(data);
-
-  if (isErr(result)) {
-    return Result.err(
-      createHttpError(Status.BadRequest, result.value.message, {
-        expose: true,
-      }),
-    );
-  }
-
-  return result;
-}
 
 export async function resolvePostParams(
   request: Request,
@@ -65,8 +45,7 @@ export async function resolvePostParams(
     );
   }
 
-  const { query, variables = null, operationName = null, extensions = null } =
-    data;
+  const { query, variables, operationName, extensions } = data;
 
   return Result.ok({
     query,
@@ -81,13 +60,13 @@ export function resolveGetParams(
 ): Result<RawParams, HttpError> {
   const url = new URL(request.url);
   const query = url.searchParams.get("query");
-  const operationName = url.searchParams.get("operationName");
+  const operationName = url.searchParams.get("operationName") ?? undefined;
 
   const variables = url.searchParams.has("variables")
     ? unsafe<json, TypeError>(() =>
       JSON.parse(url.searchParams.get("variables")!)
     )
-    : Result.ok(null);
+    : Result.ok(undefined);
 
   if (isErr(variables)) {
     return Result.err(createHttpError(
@@ -101,7 +80,7 @@ export function resolveGetParams(
     ? unsafe<json, TypeError>(() =>
       JSON.parse(url.searchParams.get("extensions")!)
     )
-    : Result.ok(null);
+    : Result.ok(undefined);
 
   if (isErr(extensions)) {
     return Result.err(createHttpError(

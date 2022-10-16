@@ -23,23 +23,20 @@ export {
 } from "https://deno.land/std@0.159.0/http/http_errors.ts";
 export { Status } from "https://deno.land/std@0.159.0/http/http_status.ts";
 export { accepts } from "https://deno.land/std@0.159.0/http/negotiation.ts";
-export {
-  hasOwn,
-  isNull,
-  isObject,
-  isString,
-} from "https://deno.land/x/isx@1.0.0-beta.22/mod.ts";
+export { isObject } from "https://deno.land/x/isx@1.0.0-beta.22/mod.ts";
 export {
   isErr,
   Result,
   unsafe,
 } from "https://deno.land/x/result_js@1.0.0/mod.ts";
-export {
-  type GraphQLRequestOptions,
-  type GraphQLRequestParams,
-} from "https://deno.land/x/gql_request@1.0.0-beta.1/mod.ts";
 export { type json } from "https://deno.land/x/pure_json@1.0.0-beta.1/mod.ts";
 export { match } from "https://deno.land/x/pattern_match@1.0.0-beta.3/mod.ts";
+export {
+  object,
+  optional,
+  string,
+  validate as validateSchema,
+} from "https://esm.sh/v96/superstruct@0.16.5";
 
 export function isNativeObject(
   // deno-lint-ignore ban-types

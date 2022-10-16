@@ -118,7 +118,10 @@ describe("createResponse", () => {
       [
         new Request(url),
         { schema },
-        new Response(`"query" must be string.`, responseInit),
+        new Response(
+          `At path: query -- Expected a string, but received: null`,
+          responseInit,
+        ),
       ],
       [
         new Request("http://test.test?query=1"),
@@ -133,7 +136,10 @@ describe("createResponse", () => {
       [
         new Request("http://test.test?query=1&variables=1"),
         { schema },
-        new Response(`"variables" must be object or null.`, responseInit),
+        new Response(
+          `At path: variables -- Expected an object, but received: 1`,
+          responseInit,
+        ),
       ],
       [
         new Request("http://test.test?query=1&variables={}"),
@@ -143,7 +149,10 @@ describe("createResponse", () => {
       [
         new Request("http://test.test?query=1&extensions=1"),
         { schema },
-        new Response(`"extensions" must be object or null.`, responseInit),
+        new Response(
+          `At path: extensions -- Expected an object, but received: 1`,
+          responseInit,
+        ),
       ],
       [
         new Request("http://test.test?query=1&extensions=["),
@@ -208,7 +217,10 @@ describe("createResponse", () => {
           body: "{}",
         }),
         { schema },
-        new Response(`"query" must be string.`, responseInit),
+        new Response(
+          `At path: query -- Expected a string, but received: undefined`,
+          responseInit,
+        ),
       ],
       [
         new Request(url, {
@@ -224,7 +236,10 @@ describe("createResponse", () => {
           body: `{"query":"","variables":1}`,
         }),
         { schema },
-        new Response(`"variables" must be object or null.`, responseInit),
+        new Response(
+          `At path: variables -- Expected an object, but received: 1`,
+          responseInit,
+        ),
       ],
       [
         new Request(url, {
@@ -232,7 +247,10 @@ describe("createResponse", () => {
           body: `{"query":"","operationName":1}`,
         }),
         { schema },
-        new Response(`"operationName" must be string or null.`, responseInit),
+        new Response(
+          `At path: operationName -- Expected a string, but received: 1`,
+          responseInit,
+        ),
       ],
       [
         new Request(url, {
@@ -240,7 +258,10 @@ describe("createResponse", () => {
           body: `{"query":"","extensions":1}`,
         }),
         { schema },
-        new Response(`"extensions" must be object or null.`, responseInit),
+        new Response(
+          `At path: extensions -- Expected an object, but received: 1`,
+          responseInit,
+        ),
       ],
       [
         new Request(url, {
@@ -261,33 +282,36 @@ describe("createResponse", () => {
     }));
   });
 
-  it("should return 400 when the query is invalid graphql format", async () => {
-    const table: [...Parameters<typeof createResponse>, Response][] = [
-      [
-        new Request(url, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: `{"query":"query {hello;"}`,
-        }),
-        { schema },
-        new Response(`Syntax Error: Unexpected character: ";".`, {
-          status: Status.BadRequest,
-          headers: {
-            "content-type": "text/plain;charset=UTF-8",
-          },
-        }),
-      ],
-    ];
+  it(
+    "should return 400 when the query is invalid graphql format",
+    async () => {
+      const table: [...Parameters<typeof createResponse>, Response][] = [
+        [
+          new Request(url, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: `{"query":"query {hello;"}`,
+          }),
+          { schema },
+          new Response(`Syntax Error: Unexpected character: ";".`, {
+            status: Status.BadRequest,
+            headers: {
+              "content-type": "text/plain;charset=UTF-8",
+            },
+          }),
+        ],
+      ];
 
-    await Promise.all(table.map(async ([req, args, expected]) => {
-      await assertEqualsResponse(
-        await createResponse(req, args),
-        expected,
-      );
-    }));
-  });
+      await Promise.all(table.map(async ([req, args, expected]) => {
+        await assertEqualsResponse(
+          await createResponse(req, args),
+          expected,
+        );
+      }));
+    },
+  );
 
   it("should return 405 when the document is not query with HTTP GET", async () => {
     const table: [...Parameters<typeof createResponse>, Response][] = [
