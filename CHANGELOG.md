@@ -1,3 +1,11 @@
+# [1.0.0-beta.3](https://github.com/graphqland/graphql-response/compare/1.0.0-beta.2...1.0.0-beta.3) (2022-10-16)
+
+
+### Features
+
+* **resolvers:** add async error handling ([9571d26](https://github.com/graphqland/graphql-response/commit/9571d269d14f9456b5c36d7777a71e4c48dbd62f))
+* **resolvers:** change validation error message, use external schema validator ([12f02e6](https://github.com/graphqland/graphql-response/commit/12f02e6a3dfd6289f9e7803cf9b38052e7869dcb))
+
 # [1.0.0-beta.2](https://github.com/graphqland/graphql-response/compare/1.0.0-beta.1...1.0.0-beta.2) (2022-10-14)
 
 
