@@ -49,13 +49,13 @@ export const makeOptions = (version: string): BuildOptions => ({
       version: "^16",
       peerDependency: true,
     },
+    "https://esm.sh/v96/superstruct@0.16.5": {
+      name: "superstruct",
+      version: "0.16.5",
+    },
     "https://deno.land/x/isx@1.0.0-beta.22/mod.ts": {
       name: "isxx",
       version: "1.0.0-beta.22",
-    },
-    "https://deno.land/x/gql_request@1.0.0-beta.1/mod.ts": {
-      name: "@graphqland/graphql-request",
-      version: "1.0.0-beta.1",
     },
     "https://deno.land/x/result_js@1.0.0/mod.ts": {
       name: "@miyauci/result",
@@ -65,9 +65,9 @@ export const makeOptions = (version: string): BuildOptions => ({
       name: "pure-json",
       version: "1.0.0-beta.1",
     },
-    "https://deno.land/x/pattern_match@1.0.0-beta.2/mod.ts": {
+    "https://deno.land/x/pattern_match@1.0.0-beta.3/mod.ts": {
       name: "@miyauci/pattern-match",
-      version: "1.0.0-beta.2",
+      version: "1.0.0-beta.3",
     },
   },
 });
