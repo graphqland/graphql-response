@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/graphqland/graphql-response/compare/1.0.0-beta.3...1.0.0-beta.4) (2022-10-27)
+
+
+### Bug Fixes
+
+* **responses:** use `execute` instead of `executeSync` ([b5c40c9](https://github.com/graphqland/graphql-response/commit/b5c40c9888c25ffbdf019aaca50095f34b0f55a2))
+
 # [1.0.0-beta.3](https://github.com/graphqland/graphql-response/compare/1.0.0-beta.2...1.0.0-beta.3) (2022-10-16)
 
 
