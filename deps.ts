@@ -3,7 +3,7 @@
 
 export {
   type DocumentNode,
-  executeSync,
+  execute,
   type ExecutionResult,
   type FormattedExecutionResult,
   getOperationAST,

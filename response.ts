@@ -4,7 +4,7 @@
 import {
   accepts,
   DocumentNode,
-  executeSync,
+  execute,
   ExecutionResult,
   getOperationAST,
   GraphQLError,
@@ -172,7 +172,7 @@ export async function createResponse(
     });
   }
 
-  const executionResult = executeSync({
+  const executionResult = await execute({
     schema,
     document,
     rootValue,
