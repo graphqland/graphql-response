@@ -20,10 +20,10 @@ export { type Maybe } from "https://esm.sh/v96/graphql@16.6.0/jsutils/Maybe.d.ts
 export {
   createHttpError,
   HttpError,
-} from "https://deno.land/std@0.159.0/http/http_errors.ts";
-export { Status } from "https://deno.land/std@0.159.0/http/http_status.ts";
-export { accepts } from "https://deno.land/std@0.159.0/http/negotiation.ts";
-export { isObject } from "https://deno.land/x/isx@1.0.0-beta.22/mod.ts";
+} from "https://deno.land/std@0.161.0/http/http_errors.ts";
+export { Status } from "https://deno.land/std@0.161.0/http/http_status.ts";
+export { accepts } from "https://deno.land/std@0.161.0/http/negotiation.ts";
+export { isObject } from "https://deno.land/x/isx@1.0.0-beta.23/mod.ts";
 export {
   isErr,
   Result,
